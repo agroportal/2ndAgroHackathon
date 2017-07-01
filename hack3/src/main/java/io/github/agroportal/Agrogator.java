@@ -15,7 +15,7 @@ import java.io.IOException;
  * Hello world!
  *
  */
-public class Agrogator
+public final class Agrogator
 {
     private static final Logger logger = LoggerFactory.getLogger(Agrogator.class);
 
@@ -39,7 +39,9 @@ public class Agrogator
             surfRend.consume(fieldMatcher);
             cotations.consume(fieldMatcher);
 
-        } catch (IOException e) {
+
+
+        } catch (final IOException e) {
             logger.error(e.getLocalizedMessage());
         }
 
