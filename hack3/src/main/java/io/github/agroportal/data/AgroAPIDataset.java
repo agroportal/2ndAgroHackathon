@@ -12,14 +12,14 @@ public class AgroAPIDataset implements Dataset {
 
     private final List<Field> fields;
 
-    public AgroAPIDataset() {
+    AgroAPIDataset() {
         fields = new ArrayList<>();
     }
 
     @Override
     public void consume(final FieldMatcher fieldMatcher) {
-        for(final Field field: fields){
-            if(!field.isMatched()) {
+        for (final Field field : fields) {
+            if (!field.isMatched()) {
                 fieldMatcher.accept(field);
             }
         }
@@ -27,12 +27,19 @@ public class AgroAPIDataset implements Dataset {
 
     @Override
     public void parseHeader(final String header) {
-        final String[] fields = header.split(";");
+        final String[] split = header.split(";");
+        for (final String field : split) {
+            final Field fieldInstance = new AgroApiField(field);
+            fields.add(fieldInstance);
+        }
     }
 
     @Override
     public void parseLine(final String line) {
-
+        final String[] split = line.split(";");
+        for (int i = 0; i<fields.size();i++) {
+            fields.get(i).addInstance(split[i]);
+        }
     }
 
     @Override

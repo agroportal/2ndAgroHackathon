@@ -60,5 +60,20 @@
           <artifactId>com.wcohen.secondstring</artifactId>
           <version>0.1</version>
       </dependency>
+      <dependency>
+          <groupId>org.sifrproject</groupId>
+          <artifactId>sifr-bioportal-annotation-model</artifactId>
+          <version>0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+          <groupId>org.sifrproject</groupId>
+          <artifactId>sifr-bioportal-annotation-client</artifactId>
+          <version>0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+          <groupId>org.pratikpharma</groupId>
+          <artifactId>bpannotatoreval</artifactId>
+          <version>1.0-SNAPSHOT</version>
+      </dependency>
   </dependencies>
 </project>

@@ -26,7 +26,7 @@ public class AgroApiDatasetReconciler implements DatasetReconciler {
     @Override
     public Set<FieldMapping> reconcile() {
 
-        
+
         return null;
     }
 }

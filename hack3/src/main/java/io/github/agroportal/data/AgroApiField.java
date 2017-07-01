@@ -4,26 +4,29 @@ import io.github.agroportal.api.data.Field;
 
 import java.util.*;
 
-public class FieldImpl implements Field {
+public class AgroApiField implements Field {
 
     private final List<String> instances;
     private final List<String> types;
     private boolean matched;
 
-    public FieldImpl() {
+    private final String name;
+
+    public AgroApiField(final String name) {
         instances = new ArrayList<>();
         types = new ArrayList<>();
+        this.name = name;
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public String generateCorpus() {
         final StringBuilder builder = new StringBuilder();
-        for(final String instance: instances){
+        for (final String instance : instances) {
             builder.append(instance);
             builder.append(" ");
         }
@@ -43,6 +46,11 @@ public class FieldImpl implements Field {
     @Override
     public void addType(final String type) {
         types.add(type);
+    }
+
+    @Override
+    public void addInstance(final String instance) {
+        instances.add(instance);
     }
 
     @Override

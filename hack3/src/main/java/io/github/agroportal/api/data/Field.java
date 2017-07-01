@@ -8,6 +8,7 @@ public interface Field extends Iterable<String>{
     Collection<String> getInstances();
     Collection<String> getTypes();
     void addType(String type);
+    void addInstance(String instance);
     boolean isMatched();
     void setMatched(boolean matched);
 }
