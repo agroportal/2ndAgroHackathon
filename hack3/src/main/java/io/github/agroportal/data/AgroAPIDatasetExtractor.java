@@ -3,9 +3,15 @@ package io.github.agroportal.data;
 
 import io.github.agroportal.api.data.Dataset;
 import io.github.agroportal.api.data.DatasetExtractor;
+import org.apache.log4j.spi.LoggerFactory;
+import org.apache.logging.log4j.core.util.IOUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Scanner;
 
 public class AgroAPIDatasetExtractor implements DatasetExtractor{
-
 
     private final String apiUrl;
 
@@ -18,6 +24,13 @@ public class AgroAPIDatasetExtractor implements DatasetExtractor{
     @Override
     public Dataset extract(final String datasetName) {
         final String downloadURL = String.format("%s/explore/dataset/%s/download/?format=csv&use_labels_for_header=true",apiUrl,datasetName);
+        String out = null;
+        try {
+            out = new Scanner(new URL(downloadURL).openStream(), "UTF-8").useDelimiter("\\A").next();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(out);
         return null;
     }
 
