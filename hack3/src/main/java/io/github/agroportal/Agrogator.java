@@ -6,6 +6,10 @@ import io.github.agroportal.api.data.DatasetExtractor;
 import io.github.agroportal.data.AgroAPIDatasetExtractor;
 import io.github.agroportal.data.CascadeFieldMatcherImpl;
 import io.github.agroportal.data.TextFieldMatcher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 /**
  * Hello world!
@@ -13,6 +17,8 @@ import io.github.agroportal.data.TextFieldMatcher;
  */
 public class Agrogator
 {
+    private static final Logger logger = LoggerFactory.getLogger(Agrogator.class);
+
     private Agrogator() {
     }
 
@@ -21,18 +27,21 @@ public class Agrogator
     {
         final DatasetExtractor extractor = new AgroAPIDatasetExtractor("https://plateforme.api-agro.fr/");
 
-        final Dataset dosesRef = extractor.extract("ift-20162017-doses-de-referencecibleculture");
-        final Dataset surfRend = extractor.extract("surfaces-rendements-et-productivites-des-productions-vegetales");
-        final Dataset cotations = extractor.extract("cotations-franceagrimer");
+        try {
+            final Dataset dosesRef = extractor.extract("ift-20162017-doses-de-referencecibleculture");
+            final Dataset surfRend = extractor.extract("surfaces-rendements-et-productivites-des-productions-vegetales");
+            final Dataset cotations = extractor.extract("cotations-franceagrimer");
 
-        final CascadeFieldMatcher fieldMatcher = new CascadeFieldMatcherImpl();
-        fieldMatcher.addFieldMatcher(new TextFieldMatcher());
+            final CascadeFieldMatcher fieldMatcher = new CascadeFieldMatcherImpl();
+            fieldMatcher.addFieldMatcher(new TextFieldMatcher());
 
-        dosesRef.consume(fieldMatcher);
-        surfRend.consume(fieldMatcher);
-        cotations.consume(fieldMatcher);
+            dosesRef.consume(fieldMatcher);
+            surfRend.consume(fieldMatcher);
+            cotations.consume(fieldMatcher);
 
-
+        } catch (IOException e) {
+            logger.error(e.getLocalizedMessage());
+        }
 
     }
 }
