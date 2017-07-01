@@ -6,9 +6,14 @@ import io.github.agroportal.api.data.DatasetExtractor;
 import org.apache.log4j.spi.LoggerFactory;
 import org.apache.logging.log4j.core.util.IOUtils;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class AgroAPIDatasetExtractor implements DatasetExtractor{
@@ -22,16 +27,26 @@ public class AgroAPIDatasetExtractor implements DatasetExtractor{
 
     @SuppressWarnings("HardcodedFileSeparator")
     @Override
-    public Dataset extract(final String datasetName) {
+    public Dataset extract(final String datasetName) throws IOException {
         final String downloadURL = String.format("%s/explore/dataset/%s/download/?format=csv&use_labels_for_header=true",apiUrl,datasetName);
-        String out = null;
-        try {
-            out = new Scanner(new URL(downloadURL).openStream(), "UTF-8").useDelimiter("\\A").next();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        URL csvUrl = new URL(downloadURL);
+        URLConnection conn = csvUrl.openConnection();
+        String line;
+        boolean firstLine = true;
+        AgroAPIDataset agroDataset = new AgroAPIDataset();
+
+        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(conn.getInputStream()) );
+        while( (line = bufferedReader.readLine()) != null )
+        {
+            if (firstLine) {
+                agroDataset.parseHeader(line);
+                firstLine = false;
+            } else {
+                agroDataset.parseLine(line);
+            }
         }
-        System.out.println(out);
-        return null;
+        return agroDataset;
     }
 
 
