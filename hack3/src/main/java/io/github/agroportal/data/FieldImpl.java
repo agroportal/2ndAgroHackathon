@@ -2,17 +2,17 @@ package io.github.agroportal.data;
 
 import io.github.agroportal.api.data.Field;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class FieldImpl implements Field {
 
     private final List<String> instances;
+    private final List<String> types;
+    private boolean matched;
 
     public FieldImpl() {
         instances = new ArrayList<>();
+        types = new ArrayList<>();
     }
 
     @Override
@@ -22,27 +22,37 @@ public class FieldImpl implements Field {
 
     @Override
     public String generateCorpus() {
-        return null;
+        final StringBuilder builder = new StringBuilder();
+        for(final String instance: instances){
+            builder.append(instance);
+            builder.append(" ");
+        }
+        return builder.toString();
     }
 
     @Override
     public Collection<String> getInstances() {
-        return null;
+        return Collections.unmodifiableList(instances);
     }
 
     @Override
     public Collection<String> getTypes() {
-        return null;
+        return Collections.unmodifiableCollection(types);
     }
 
     @Override
-    public void addType(String type) {
-
+    public void addType(final String type) {
+        types.add(type);
     }
 
     @Override
     public boolean isMatched() {
-        return false;
+        return matched;
+    }
+
+    @Override
+    public void setMatched(final boolean matched) {
+        this.matched = matched;
     }
 
     @Override

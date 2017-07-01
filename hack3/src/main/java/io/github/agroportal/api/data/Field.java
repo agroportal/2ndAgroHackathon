@@ -9,4 +9,5 @@ public interface Field extends Iterable<String>{
     Collection<String> getTypes();
     void addType(String type);
     boolean isMatched();
+    void setMatched(boolean matched);
 }

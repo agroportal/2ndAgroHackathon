@@ -7,15 +7,17 @@ import io.github.agroportal.api.data.DatasetExtractor;
 public class AgroAPIDatasetExtractor implements DatasetExtractor{
 
 
-    private final String downloadURL;
+    private final String apiUrl;
 
-    @SuppressWarnings("HardcodedFileSeparator")
-    public AgroAPIDatasetExtractor(final String apiUrl, final String datasetName) {
-        downloadURL = String.format("%s/explore/dataset/%s/download/?format=csv&use_labels_for_header=true",apiUrl,datasetName);
+
+    public AgroAPIDatasetExtractor(String apiUrl) {
+        this.apiUrl = apiUrl;
     }
 
+    @SuppressWarnings("HardcodedFileSeparator")
     @Override
-    public Dataset extract() {
+    public Dataset extract(final String datasetName) {
+        final String downloadURL = String.format("%s/explore/dataset/%s/download/?format=csv&use_labels_for_header=true",apiUrl,datasetName);
         return null;
     }
 

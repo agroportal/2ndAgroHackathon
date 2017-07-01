@@ -1,7 +1,7 @@
 package io.github.agroportal.api.data;
 
-import java.util.function.Supplier;
-
-public interface Dataset extends Iterable<Supplier<Field>> {
+public interface Dataset extends Iterable<Field> {
     void consume (FieldMatcher fieldMatcher);
+    void parseHeader(String header);
+    void parseLine(String line);
 }

@@ -30,7 +30,7 @@ public class CascadeFieldMatcherImpl implements CascadeFieldMatcher {
             final FieldMatcher fieldMatcher = matcherIterator.next();
             matched = fieldMatcher.accept(field);
         }
-
+        field.setMatched(matched);
         return matched;
     }
 }
