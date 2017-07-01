@@ -6,6 +6,8 @@ import io.github.agroportal.api.data.DatasetExtractor;
 import io.github.agroportal.data.AgroAPIDatasetExtractor;
 import io.github.agroportal.data.CascadeFieldMatcherImpl;
 import io.github.agroportal.data.TextFieldMatcher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -15,6 +17,8 @@ import java.io.IOException;
  */
 public class Agrogator
 {
+    private static final Logger logger = LoggerFactory.getLogger(Agrogator.class);
+
     private Agrogator() {
     }
 
@@ -36,7 +40,7 @@ public class Agrogator
             cotations.consume(fieldMatcher);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getLocalizedMessage());
         }
 
     }
