@@ -19,7 +19,9 @@ public class AgroAPIDataset implements Dataset {
     @Override
     public void consume(final FieldMatcher fieldMatcher) {
         for(final Field field: fields){
-            fieldMatcher.accept(field);
+            if(!field.isMatched()) {
+                fieldMatcher.accept(field);
+            }
         }
     }
 

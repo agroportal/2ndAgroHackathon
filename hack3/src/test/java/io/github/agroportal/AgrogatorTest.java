@@ -1,10 +1,13 @@
 package io.github.agroportal;
 
+import io.github.agroportal.api.data.Dataset;
 import io.github.agroportal.api.data.DatasetExtractor;
 import io.github.agroportal.data.AgroAPIDatasetExtractor;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import java.io.IOException;
 
 /**
  * Unit test for simple Agrogator.
@@ -44,8 +47,13 @@ public class AgrogatorTest
     public void testExtract()
     {
         // https://plateforme.api-agro.fr/explore/dataset/codes-race-des-ruminants/download/?format=csv&timezone=Europe/Berlin&use_labels_for_header=true
+        Dataset agroDataset = null;
         final DatasetExtractor extractor = new AgroAPIDatasetExtractor("https://plateforme.api-agro.fr/");
-        extractor.extract( "codes-race-des-ruminants");
+        try {
+            agroDataset = extractor.extract( "codes-race-des-ruminants");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         assertTrue( true );
     }
 }
