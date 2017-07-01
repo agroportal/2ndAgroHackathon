@@ -11,9 +11,11 @@ import java.util.List;
 public class AgroAPIDataset implements Dataset {
 
     private final List<Field> fields;
+    private final String name;
 
-    AgroAPIDataset() {
+    AgroAPIDataset(final String name) {
         fields = new ArrayList<>();
+        this.name = name;
     }
 
     @Override
@@ -29,21 +31,30 @@ public class AgroAPIDataset implements Dataset {
     public void parseHeader(final String header) {
         final String[] split = header.split(";");
         for (final String field : split) {
-            final Field fieldInstance = new AgroApiField(field);
+            final Field fieldInstance = new AgroApiField(field, this);
             fields.add(fieldInstance);
         }
     }
 
     @Override
     public void parseLine(final String line) {
-        final String[] split = line.split(";");
-        for (int i = 0; i<fields.size();i++) {
-            fields.get(i).addInstance(split[i]);
+        if(line!=null) {
+            final String[] split = line.split(";");
+            if(split.length==fields.size()) {
+                for (int i = 0; i < fields.size(); i++) {
+                    fields.get(i).addInstance(split[i]);
+                }
+            }
         }
     }
 
     @Override
     public Iterator<Field> iterator() {
         return fields.iterator();
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

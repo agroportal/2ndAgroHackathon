@@ -1,5 +1,6 @@
 package io.github.agroportal.data;
 
+import io.github.agroportal.api.data.Dataset;
 import io.github.agroportal.api.data.Field;
 
 import java.util.*;
@@ -12,10 +13,18 @@ public class AgroApiField implements Field {
 
     private final String name;
 
-    public AgroApiField(final String name) {
+    private final Dataset dataset;
+
+    public AgroApiField(final String name, final Dataset dataset) {
         instances = new ArrayList<>();
         types = new ArrayList<>();
         this.name = name;
+        this.dataset = dataset;
+    }
+
+    @Override
+    public Dataset getDataset() {
+        return dataset;
     }
 
     @Override

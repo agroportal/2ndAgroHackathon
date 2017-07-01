@@ -17,11 +17,12 @@ public class AgroApiDatasetReconciler implements DatasetReconciler {
 
     private final List<Dataset> datasets;
     private TverskiIndex tversky;
-    private double treshold;
+    private double threshold;
 
-    public AgroApiDatasetReconciler() {
+    public AgroApiDatasetReconciler(final double threshold) {
         datasets = new ArrayList<>();
         tversky = new TverskiIndex(1, 0, 0, false, true);
+        this.threshold = threshold;
     }
 
     @Override
@@ -30,9 +31,6 @@ public class AgroApiDatasetReconciler implements DatasetReconciler {
 
     }
 
-    public void setTreshold(double treshold) {
-        this.treshold = treshold;
-    }
 
     @Override
     public Set<FieldMapping> reconcile() {
@@ -52,7 +50,7 @@ public class AgroApiDatasetReconciler implements DatasetReconciler {
                             List<String> field2Content = (List<String>) field2.getInstances();
                             double sim = tversky.compute(field1Content, field2Content);
                             
-                            if(sim >= treshold) {
+                            if(sim >= threshold) {
                                 Set<Field> associatedFields = new HashSet<>();
                                 associatedFields.add(field1);
                                 associatedFields.add(field2);

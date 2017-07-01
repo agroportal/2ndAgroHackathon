@@ -26,7 +26,7 @@ public class AgroAPIDatasetExtractor implements DatasetExtractor {
 
         final URL csvUrl = new URL(downloadURL);
         final URLConnection conn = csvUrl.openConnection();
-        final Dataset agroDataset = new AgroAPIDataset();
+        final Dataset agroDataset = new AgroAPIDataset(datasetName);
 
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
             final String firstLine = bufferedReader.readLine();

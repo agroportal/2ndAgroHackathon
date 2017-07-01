@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 public class TextFieldMatcher implements FieldMatcher {
 
-    private static final String PRODUCTION_KEY = "";
+    private static final String PRODUCTION_KEY = "2ae951bf-2d83-42a7-944a-295a843d3307";
     @SuppressWarnings("HardcodedLineSeparator")
     private static final Pattern SPECIAL_CHARS = Pattern.compile("[\t\n\r]");
 
