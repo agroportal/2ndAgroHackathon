@@ -75,7 +75,8 @@ public class TverskiIndex implements SimilarityMeasure {
         return compute(segmenter.segment(first), segmenter.segment(second));
     }
 
-    double compute(final List<String> first, final List<String> second) {
+
+    public double compute(final List<String> first, final List<String> second) {
         final double overlap = fuzzyMatching ? computeFuzzyOverlap(first, second) : computeOverlap(first, second);
         final double diffA = first.size() - overlap;
         final double diffB = second.size() - overlap;
