@@ -42,7 +42,7 @@ public class AgroApiDatasetReconciler implements DatasetReconciler {
                     Iterator<Field> fieldIt = dataset.iterator();
                     while(fieldIt.hasNext()) {
                         Field field1 = fieldIt.next();
-                        Iterator<Field> fieldIt2 = dataset.iterator();
+                        Iterator<Field> fieldIt2 = dataset2.iterator();
                         
                         while(fieldIt2.hasNext()) {
                             Field field2 = fieldIt2.next();
