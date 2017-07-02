@@ -6,6 +6,7 @@ public interface Field extends Iterable<String>{
     Dataset getDataset();
     String getName();
     String generateCorpus();
+    String generateCorpus(int length);
     Collection<String> getInstances();
     Collection<String> getTypes();
     void addType(String type);

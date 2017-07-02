@@ -15,11 +15,14 @@ public class AgroApiField implements Field {
 
     private final Dataset dataset;
 
+    private Set<String> values;
+
     public AgroApiField(final String name, final Dataset dataset) {
         instances = new ArrayList<>();
         types = new ArrayList<>();
         this.name = name;
         this.dataset = dataset;
+        values = new HashSet<>();
     }
 
     @Override
@@ -34,12 +37,18 @@ public class AgroApiField implements Field {
 
     @Override
     public String generateCorpus() {
+        values.addAll(instances);
         final StringBuilder builder = new StringBuilder();
-        for (final String instance : instances) {
-            builder.append(instance);
-            builder.append(" ");
+        for (final String value : values) {
+            builder.append(value).append(" ");
         }
         return builder.toString();
+    }
+
+    @Override
+    public String generateCorpus(final int length) {
+        final String corpus = generateCorpus();
+        return corpus.substring(0, Math.min(corpus.length(), length));
     }
 
     @Override

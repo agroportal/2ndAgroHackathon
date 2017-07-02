@@ -48,7 +48,7 @@ public class AgrogatorTest
     {
         // https://plateforme.api-agro.fr/explore/dataset/codes-race-des-ruminants/download/?format=csv&timezone=Europe/Berlin&use_labels_for_header=true
         Dataset agroDataset = null;
-        final DatasetExtractor extractor = new AgroAPIDatasetExtractor("https://plateforme.api-agro.fr/");
+        final DatasetExtractor extractor = new AgroAPIDatasetExtractor("https://plateforme.api-agro.fr/", null);
         try {
             agroDataset = extractor.extract( "codes-race-des-ruminants");
         } catch (IOException e) {

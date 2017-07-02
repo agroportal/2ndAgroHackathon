@@ -31,7 +31,7 @@ public class TextFieldMatcher implements FieldMatcher {
 
     @Override
     public boolean accept(final Field field) {
-        final String corpus = field.generateCorpus();
+        final String corpus = field.generateCorpus(4000);
         final BioPortalAnnotator annotator = BioportalAnnotatorFactory.createDefaultAnnotator("http://services.agroportal.lirmm.fr/annotator/", PRODUCTION_KEY);
         final Matcher matcher = SPECIAL_CHARS.matcher(corpus);
         final BioportalAnnotatorQueryBuilder queryBuilder = BioportalAnnotatorQueryBuilder.DEFAULT
