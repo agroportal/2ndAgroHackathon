@@ -33,8 +33,8 @@ public final class Agrogator
             final Dataset dosesRef = extractor.extract("ift-20162017-doses-de-referencecibleculture");
             logger.info("Loading dataset...");
             final Dataset surfRend = extractor.extract("surfaces-rendements-et-productivites-des-productions-vegetales");
-            logger.info("Loading dataset...");
-            final Dataset cotations = extractor.extract("cotations-franceagrimer");
+//            logger.info("Loading dataset...");
+            //final Dataset cotations = extractor.extract("cotations-franceagrimer");
 
             final CascadeFieldMatcher fieldMatcher = new CascadeFieldMatcherImpl();
             fieldMatcher.addFieldMatcher(new TextFieldMatcher());
@@ -43,8 +43,8 @@ public final class Agrogator
             dosesRef.consume(fieldMatcher);
             logger.info("Matching and annotating fields...");
             surfRend.consume(fieldMatcher);
-            logger.info("Matching and annotating fields...");
-            cotations.consume(fieldMatcher);
+//            logger.info("Matching and annotating fields...");
+//            cotations.consume(fieldMatcher);
 
             final DatasetReconciler reconciler = new AgroApiDatasetReconciler(THRESHOLD);
             reconciler.addDataset(dosesRef);

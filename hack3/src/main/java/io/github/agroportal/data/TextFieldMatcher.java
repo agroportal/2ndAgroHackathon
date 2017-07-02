@@ -36,7 +36,7 @@ public class TextFieldMatcher implements FieldMatcher {
         final Matcher matcher = SPECIAL_CHARS.matcher(corpus);
         final BioportalAnnotatorQueryBuilder queryBuilder = BioportalAnnotatorQueryBuilder.DEFAULT
                 .text(matcher.replaceAll(" ").trim()).expand_mappings(true)
-                .lemmatize(false).ontologies();//.recognizer("unitex");
+                .lemmatize(false).ontologies("CROPUSAGE-FR");//.recognizer("unitex");
         try {
             final String annotationOutput = annotator.runQuery(queryBuilder.build());
             final AnnotationFactory annotationFactory = new BioPortalLazyAnnotationFactory();
